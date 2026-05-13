@@ -2,8 +2,7 @@
 
 Aplicación web interactiva que calcula la pensión de jubilación anticipada (voluntaria o involuntaria) según la normativa española vigente en 2026. El simulador aplica los coeficientes reductores oficiales y muestra una comparativa gráfica con la jubilación ordinaria.
 
-![Vista previa](screenshot.png)  
-*(Puedes añadir una captura de pantalla de la aplicación)*
+
 
 ## ✨ Características
 
