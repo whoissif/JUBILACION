@@ -39,4 +39,4 @@ Aplicación web interactiva que calcula la pensión de jubilación anticipada (v
 - [Chart.js](https://www.chart.js/) para gráficos interactivos
 - Fuente del sistema (Inter / SF Pro / Segoe UI)
 
-## 📁 Estructura del proyecto
+
