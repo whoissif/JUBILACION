@@ -2,74 +2,68 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulador de Jubilación 2026 | Pro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Jubilación 2026 · Simulador profesional</title>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="app-container">
-        <header>
-            <h1>Simulador de Jubilación <span>España 2026</span></h1>
-            <p>Analiza el impacto de la jubilación anticipada sobre tu pensión futura</p>
-        </header>
-
-        <main>
-            <section class="input-panel card">
-                <h2>Datos de Cotización</h2>
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label for="baseReg">Base Reguladora Estimada (€/mes)</label>
-                        <input type="number" id="baseReg" value="2500" min="0" step="10">
-                        <small class="input-help">
-                            * No es tu sueldo actual. Es la media de tus bases de los últimos 25 años.
-                        </small>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="anosCot">Años Cotizados Totales</label>
-                        <input type="number" id="anosCot" value="37" min="15" step="0.1">
-                        <small class="input-help">
-                            Mínimo 15 años para acceder a pensión.
-                        </small>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="mesesAdelanto">Meses de Anticipación</label>
-                        <input type="number" id="mesesAdelanto" value="24" min="0" max="48">
-                        <small class="input-help">
-                            Voluntaria (máx 24) o Involuntaria (máx 48).
-                        </small>
-                    </div>
-                </div>
-                
-                <button id="calcBtn" class="primary-btn">Calcular Comparativa Real</button>
-            </section>
-
-            <section id="resultsSection" class="results-container" style="display: none;">
-                <div class="summary-info card">
-                    <div class="summary-item">
-                        <span class="label">Edad Ordinaria 2026:</span>
-                        <span id="edadOrdText" class="value">--</span>
-                    </div>
-                    <div class="summary-item">
-                        <span class="label">% Pensión por Cotización:</span>
-                        <span id="pctBaseText" class="value">--</span>
-                    </div>
-                </div>
-
-                <div class="options-grid" id="optionsGrid">
-                    </div>
-            </section>
-        </main>
-
-        <footer>
-            <div class="footer-content">
-                <p><strong>Aviso Importante:</strong> Este simulador aplica los coeficientes reductores mensuales actualizados para 2026 según la Ley 21/2021.</p>
-                <p>Los cálculos son informativos y no vinculantes. Consulta siempre con la Seguridad Social.</p>
-            </div>
-        </footer>
+<div class="container">
+    <div class="theme-switch">
+        <div class="theme-btn" id="themeToggle">🌙 Modo oscuro</div>
+    </div>
+    <div class="header">
+        <h1>📊 Jubilación 2026</h1>
+        <div class="sub">Simulador avanzado · Coeficientes oficiales involuntaria + voluntaria</div>
     </div>
 
-    <script src="script.js"></script>
+    <div class="dashboard">
+        <!-- Panel izquierdo: inputs -->
+        <div class="card">
+            <h3>📌 Datos personales</h3>
+            <div class="form-group">
+                <label>💶 Base reguladora (€/mes)</label>
+                <input type="number" id="baseReg" value="2100" step="50">
+            </div>
+            <div class="form-group">
+                <label>📆 Años cotizados totales</label>
+                <input type="number" id="years" value="39" step="0.5" min="15" max="50">
+            </div>
+            <div class="form-group">
+                <label>📅 Meses de adelanto (0 a 48)</label>
+                <div class="slider-row">
+                    <input type="range" id="monthsSlider" min="0" max="48" value="24" step="1">
+                    <span class="month-value" id="monthsValue">24</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>⚡ Tipo de jubilación anticipada</label>
+                <div class="radio-group" id="typeSelector">
+                    <div class="radio-option" data-type="voluntary">Voluntaria (máx 24m)</div>
+                    <div class="radio-option active" data-type="involuntary">Involuntaria (máx 48m)</div>
+                </div>
+            </div>
+            <button class="primary" id="calcBtn">🔄 Calcular pensión final</button>
+            <div id="warningMsg" class="warning" style="display: none;"></div>
+        </div>
+
+        <!-- Panel derecho: resultados + gráfico -->
+        <div class="card">
+            <h3>📈 Comparativa de pensión</h3>
+            <div id="resultArea">
+                <p style="text-align:center">Rellena los datos y pulsa calcular.</p>
+            </div>
+            <canvas id="pensionChart" width="400" height="200" style="max-width:100%"></canvas>
+            <div id="detailInfo" style="margin-top: 1rem; font-size:0.85rem;"></div>
+        </div>
+    </div>
+    <div class="footer-note">
+        * Tablas oficiales para involuntaria basadas en el PDF proporcionado. Voluntaria según coeficientes legales 2026.<br>
+        La pensión ordinaria se calcula con el % por años cotizados (máximo 100%).
+    </div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
