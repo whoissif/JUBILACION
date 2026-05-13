@@ -1,39 +1,43 @@
-# Simulador de Jubilación España 2026
+# 📊 Simulador de Jubilación España 2026
 
-## Descripción
-Esta aplicación web es un simulador diseñado para ayudar a los trabajadores españoles a comprender el impacto económico de la jubilación anticipada. Basada en la normativa vigente para 2026 (Ley 21/2021 y coeficientes reductores asociados), la herramienta permite calcular cómo varía la pensión en función de la edad de jubilación y los años cotizados.
+Aplicación web interactiva que calcula la pensión de jubilación anticipada (voluntaria o involuntaria) según la normativa española vigente en 2026. El simulador aplica los coeficientes reductores oficiales y muestra una comparativa gráfica con la jubilación ordinaria.
 
-## Características principales
-- **Cálculo de Pensión:** Determina la pensión estimada basándose en la Base Reguladora media de los últimos 25 años.
-- **Simulación de Anticipación:** Aplica automáticamente los coeficientes reductores legales según los meses de anticipación (voluntaria e involuntaria).
-- **Interfaz Intuitiva:** Diseño limpio y enfocado en la experiencia del usuario, con notas aclaratorias para evitar errores comunes de concepto (diferencia entre sueldo y Base Reguladora).
-- **Actualización 2026:** Integración de los parámetros legales vigentes para el año 2026.
+![Vista previa](screenshot.png)  
+*(Puedes añadir una captura de pantalla de la aplicación)*
 
-## Cómo funciona
-1. **Entrada de Datos:**
-    - **Base Reguladora:** Debe ingresarse la media de las bases de cotización de los últimos 25 años.
-    - **Años Cotizados:** Total de años computables para el cálculo de la pensión.
-    - **Meses de Anticipación:** Número de meses que se desea adelantar la jubilación respecto a la edad legal ordinaria.
-2. **Procesamiento:** El motor de cálculo (`script.js`) aplica el porcentaje de pensión correspondiente y ajusta la cifra final mediante la tabla de coeficientes reductores.
-3. **Resultados:** Muestra la comparación clara entre la pensión en jubilación ordinaria y la pensión tras aplicar la penalización por jubilación anticipada.
+## ✨ Características
 
-## Tecnologías utilizadas
-- **HTML5**: Estructura semántica.
-- **CSS3**: Diseño responsivo y estilizado.
-- **JavaScript (ES6+)**: Lógica de cálculo y manipulación del DOM.
+- **Cálculo personalizado** a partir de:
+  - Base reguladora (euros/mes)
+  - Años cotizados totales
+  - Meses de adelanto (0 a 48)
+  - Tipo de anticipación: voluntaria (máx 24 meses) o involuntaria (máx 48 meses)
+- **Coeficientes reductores exactos**:
+  - Involuntaria: tabla oficial mes a mes (extraída del PDF normativo) con 4 tramos de cotización.
+  - Voluntaria: tabla legal 2026 con interpolación para meses intermedios.
+- **Cálculo de la pensión ordinaria** según el porcentaje que corresponde por años cotizados (escala 0,21% y 0,19% por mes extra hasta el 100%).
+- **Gráfico de barras comparativo** (Chart.js) entre pensión ordinaria y con anticipación.
+- **Modo oscuro/claro** persistente (detecta preferencia del sistema y permite cambio manual).
+- **Diseño responsive** y moderno (glassmorphism, sliders táctiles, validaciones en tiempo real).
+- **Avisos inteligentes** si no se cumplen los requisitos mínimos (edad, años cotizados, límites de adelanto).
 
-## Estructura del Proyecto
-- `index.html`: Página principal con el formulario de entrada.
-- `styles.css`: Hojas de estilo para la interfaz.
-- `script.js`: Lógica de negocio y cálculos de pensiones.
+## 🧮 Fórmulas y normativa aplicada
 
-## Aviso Legal
-Esta herramienta es meramente informativa. Los resultados son estimaciones basadas en la normativa publicada y no constituyen una asesoría jurídica ni vinculante. Para decisiones definitivas, se recomienda consultar directamente con el Instituto Nacional de la Seguridad Social (INSS).
+- **Edad ordinaria de jubilación 2026**: 65 años si se han cotizado al menos 38 años y 3 meses; en caso contrario 66 años y 10 meses.
+- **Porcentaje de la base reguladora**:
+  - 15 años cotizados → 50%
+  - Por cada mes adicional (hasta 146 meses) → +0,21%
+  - A partir del mes 147 → +0,19% hasta alcanzar el 100%
+- **Coeficientes reductores**:
+  - **Anticipada voluntaria**: adelanto máximo 24 meses. Tabla por tramos de cotización (similar a la involuntaria pero con porcentajes distintos).
+  - **Anticipada involuntaria**: adelanto máximo 48 meses. Tabla oficial extraída del PDF proporcionado, con valores exactos para cada mes y tramo.
 
-## Instalación y Ejecución
-1. Clona este repositorio: `git clone [url-del-repositorio]`
-2. Abre el archivo `index.html` directamente en tu navegador.
-3. No requiere compilación ni servidor backend para su funcionamiento básico.
+## 🛠️ Tecnologías utilizadas
 
----
-*Desarrollado para facilitar la comprensión de las pensiones en el sistema español.*
+- HTML5 semántico
+- CSS3 (variables CSS, flexbox, grid, media queries)
+- JavaScript vanilla (ES6+)
+- [Chart.js](https://www.chart.js/) para gráficos interactivos
+- Fuente del sistema (Inter / SF Pro / Segoe UI)
+
+## 📁 Estructura del proyecto
