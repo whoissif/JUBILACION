@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Jubilación 2026 | Pro</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1>Simulador de Jubilación <span>España 2026</span></h1>
+            <p>Analiza el impacto de la jubilación anticipada sobre tu pensión futura</p>
+        </header>
+
+        <main>
+            <section class="input-panel card">
+                <h2>Datos de Cotización</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="baseReg">Base Reguladora Estimada (€/mes)</label>
+                        <input type="number" id="baseReg" value="2500" min="0" step="10">
+                        <small class="input-help">
+                            * No es tu sueldo actual. Es la media de tus bases de los últimos 25 años.
+                        </small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="anosCot">Años Cotizados Totales</label>
+                        <input type="number" id="anosCot" value="37" min="15" step="0.1">
+                        <small class="input-help">
+                            Mínimo 15 años para acceder a pensión.
+                        </small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mesesAdelanto">Meses de Anticipación</label>
+                        <input type="number" id="mesesAdelanto" value="24" min="0" max="48">
+                        <small class="input-help">
+                            Voluntaria (máx 24) o Involuntaria (máx 48).
+                        </small>
+                    </div>
+                </div>
+                
+                <button id="calcBtn" class="primary-btn">Calcular Comparativa Real</button>
+            </section>
+
+            <section id="resultsSection" class="results-container" style="display: none;">
+                <div class="summary-info card">
+                    <div class="summary-item">
+                        <span class="label">Edad Ordinaria 2026:</span>
+                        <span id="edadOrdText" class="value">--</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="label">% Pensión por Cotización:</span>
+                        <span id="pctBaseText" class="value">--</span>
+                    </div>
+                </div>
+
+                <div class="options-grid" id="optionsGrid">
+                    </div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="footer-content">
+                <p><strong>Aviso Importante:</strong> Este simulador aplica los coeficientes reductores mensuales actualizados para 2026 según la Ley 21/2021.</p>
+                <p>Los cálculos son informativos y no vinculantes. Consulta siempre con la Seguridad Social.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
