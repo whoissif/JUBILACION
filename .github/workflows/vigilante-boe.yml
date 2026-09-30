@@ -1,0 +1,54 @@
+name: Vigilante BOE
+
+on:
+  schedule:
+    - cron: '0 6 1 * *'   # día 1 de cada mes
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  comparar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Comparar legislacion.js con el BOE
+        id: boe
+        run: |
+          set +e
+          node verificacion/boe.js | tee informe.txt
+          echo "codigo=${PIPESTATUS[0]}" >> "$GITHUB_OUTPUT"
+      - name: Registrar la fecha de verificación (solo si todo coincide)
+        if: steps.boe.outputs.codigo == '0'
+        run: |
+          node verificacion/boe.js --aceptar
+          if ! git diff --quiet estado-boe.json; then
+            git config user.name "github-actions"
+            git config user.email "github-actions@users.noreply.github.com"
+            git add estado-boe.json
+            git commit -m "Vigilante BOE: verificación $(date +%F)"
+            git push
+          fi
+      - name: Abrir issue si hay diferencias o cambios
+        if: steps.boe.outputs.codigo != '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          {
+            echo "El vigilante del BOE ha detectado diferencias o cambios (código ${{ steps.boe.outputs.codigo }})."
+            echo
+            echo '```'
+            cat informe.txt
+            echo '```'
+            echo
+            echo "Revisa el texto en https://www.boe.es/buscar/act.php?id=BOE-A-2015-11724, ajusta \`legislacion.js\` y ejecuta \`node verificacion/boe.js --aceptar\`. Ver docs/CHECKLIST-LEGISLACION.md."
+          } > cuerpo.md
+          gh issue create --repo "$GITHUB_REPOSITORY" --title "Vigilante BOE: cambios en la normativa ($(date +%F))" --body-file cuerpo.md
+      - name: Fallar el job si hay diferencias
+        if: steps.boe.outputs.codigo != '0'
+        run: exit 1

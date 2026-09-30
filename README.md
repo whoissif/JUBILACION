@@ -22,14 +22,14 @@ Aplicación web interactiva que calcula la pensión de jubilación anticipada (v
 
 ## 🧮 Fórmulas y normativa aplicada
 
-- **Edad ordinaria de jubilación 2026**: 65 años si se han cotizado al menos 38 años y 3 meses; en caso contrario 66 años y 8 meses (67 años desde 2027).
+- **Edad ordinaria de jubilación 2026**: 65 años si se han cotizado al menos 38 años y 3 meses; en caso contrario 66 años y 10 meses (67 años desde 2027; DT 7ª LGSS).
 - **Porcentaje de la base reguladora** (art. 210 y DT 9ª LGSS):
   - 15 años cotizados → 50%
   - 2026: +0,21% los primeros 49 meses adicionales y +0,19% los 209 siguientes → 100% con 36 años y 6 meses
   - 2027 en adelante: +0,19% los primeros 248 meses y +0,18% los 16 siguientes → 100% con 37 años
 - **Coeficientes reductores**:
   - **Anticipada voluntaria**: adelanto máximo 24 meses. Tabla por tramos de cotización (similar a la involuntaria pero con porcentajes distintos).
-  - **Anticipada involuntaria**: adelanto máximo 48 meses. Tabla heredada de un PDF; **pendiente de contrastar con el BOE**.
+  - **Anticipada involuntaria**: adelanto máximo 48 meses. Tablas de los arts. 207.2 (involuntaria) y 208.2 (voluntaria) LGSS, contrastadas automáticamente con el BOE.
 
 ## 🛠️ Tecnologías utilizadas
 
@@ -48,7 +48,8 @@ Los parámetros legales están aislados en `legislacion.js` (con fuente, vigenci
 
 ```bash
 npm test            # tests del cálculo + integridad + humo de la web (Node ≥ 20)
+npm run boe         # contrasta legislacion.js con el texto consolidado del BOE (necesita red)
 npm run verificar   # informe: errores de coherencia y avisos (datos sin contrastar, revisión caducada)
 ```
 
-Comprueba, entre otras cosas, que las escalas suman 100%, que las tablas están completas y son monótonas, los límites de los tramos de cotización, los requisitos de acceso y que existan parámetros del año en curso. Una GitHub Action lo ejecuta en cada push y el día 1 de cada mes. Procedimiento de actualización: [`docs/CHECKLIST-LEGISLACION.md`](docs/CHECKLIST-LEGISLACION.md).
+Comprueba, entre otras cosas, que las escalas suman 100%, que las tablas están completas y son monótonas, los límites de los tramos de cotización, los requisitos de acceso y que existan parámetros del año en curso. Una GitHub Action lo ejecuta en cada push y el día 1 de cada mes; otra («Vigilante BOE») compara con el BOE cada mes y abre un issue si algo cambia. Procedimiento de actualización: [`docs/CHECKLIST-LEGISLACION.md`](docs/CHECKLIST-LEGISLACION.md).

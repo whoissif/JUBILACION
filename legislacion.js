@@ -3,7 +3,7 @@
  *
  * Cada bloque lleva: fuente normativa y estado de verificación.
  *   verificado: 'contrastado' -> comprobado contra texto oficial (BOE / Seguridad Social)
- *   verificado: 'pendiente'   -> valor heredado, aún NO contrastado con el BOE
+ *   verificado: 'pendiente'   -> valor aún NO contrastado con el BOE (lo comprueba verificacion/boe.js)
  * Al cambiar la ley: añade un bloque por año en `porAnio`, actualiza `revisarAntes`
  * y ejecuta `npm test` (ver docs/CHECKLIST-LEGISLACION.md).
  */
@@ -42,18 +42,18 @@
     };
 
     const VOLUNTARIA = {
-        24: [21.00,19.00,17.00,13.00], 23: [20.00,18.13,16.25,12.38],
-        22: [19.00,17.25,15.50,11.75], 21: [18.00,16.38,14.75,11.13],
-        20: [17.00,15.50,14.00,10.50], 19: [16.00,14.63,13.25,9.88],
-        18: [15.00,13.75,12.50,9.25],  17: [14.00,12.88,11.75,8.63],
-        16: [13.00,12.00,11.00,8.00],  15: [12.00,11.13,10.25,7.38],
-        14: [11.00,10.25,9.50,6.75],   13: [10.00,9.38,8.75,6.13],
-        12: [9.00,8.50,8.00,5.50],     11: [8.17,7.75,7.33,5.04],
-        10: [7.33,7.00,6.67,4.58],     9: [6.50,6.25,6.00,4.13],
-        8: [5.67,5.50,5.33,3.67],      7: [4.83,4.75,4.67,3.21],
-        6: [4.00,4.00,4.00,2.75],      5: [3.25,3.25,3.25,2.25],
-        4: [2.50,2.50,2.50,1.75],      3: [1.75,1.75,1.75,1.25],
-        2: [1.00,1.00,1.00,0.75],      1: [0.50,0.50,0.50,0.50]
+        24: [21.00,19.00,17.00,13.00], 23: [17.60,16.50,15.00,12.00],
+        22: [14.67,14.00,13.33,11.00], 21: [12.57,12.00,11.43,10.00],
+        20: [11.00,10.50,10.00,9.20], 19: [9.78,9.33,8.89,8.40],
+        18: [8.80,8.40,8.00,7.60], 17: [8.00,7.64,7.27,6.91],
+        16: [7.33,7.00,6.67,6.33], 15: [6.77,6.46,6.15,5.85],
+        14: [6.29,6.00,5.71,5.43], 13: [5.87,5.60,5.33,5.07],
+        12: [5.50,5.25,5.00,4.75], 11: [5.18,4.94,4.71,4.47],
+        10: [4.89,4.67,4.44,4.22], 9: [4.63,4.42,4.21,4.00],
+        8: [4.40,4.20,4.00,3.80], 7: [4.19,4.00,3.81,3.62],
+        6: [4.00,3.82,3.64,3.45], 5: [3.83,3.65,3.48,3.30],
+        4: [3.67,3.50,3.33,3.17], 3: [3.52,3.36,3.20,3.04],
+        2: [3.38,3.23,3.08,2.92], 1: [3.26,3.11,2.96,2.81]
     };
 
     return {
@@ -66,21 +66,21 @@
         // Tramos de cotización del coeficiente reductor, en MESES cotizados (límite inferior).
         tramosCotizacion: {
             limitesMeses: [0, 38 * 12 + 6, 41 * 12 + 6, 44 * 12 + 6],
-            fuente: 'Arts. 206 bis y 207 LGSS, redacción RDL 2/2023',
+            fuente: 'Arts. 207.2 y 208.2 LGSS (Ley 21/2021)',
             verificado: 'contrastado'
         },
 
         anticipada: {
-            voluntaria:   { maxMeses: 24, minMesesCotizados: 35 * 12, fuente: 'Art. 206 bis LGSS', verificado: 'contrastado' },
-            involuntaria: { maxMeses: 48, minMesesCotizados: 33 * 12, fuente: 'Art. 207 LGSS',     verificado: 'contrastado' }
+            voluntaria:   { maxMeses: 24, minMesesCotizados: 35 * 12, fuente: 'Art. 208 LGSS (Ley 21/2021)', verificado: 'contrastado' },
+            involuntaria: { maxMeses: 48, minMesesCotizados: 33 * 12, fuente: 'Art. 207 LGSS (Ley 21/2021)', verificado: 'contrastado' }
         },
 
         minMesesCotizadosPension: 15 * 12, // Art. 205.1.b LGSS
 
         porAnio: {
             2026: {
-                // DT 7ª LGSS: 65 años con >= 38a3m cotizados; si no, 66a8m.
-                edadOrdinaria: { mesesCotizadosParaEdadMenor: 38 * 12 + 3, edadMenor: [65, 0], edadGeneral: [66, 8] },
+                // DT 7ª LGSS: 65 años con >= 38a3m cotizados; si no, 66a10m.
+                edadOrdinaria: { mesesCotizadosParaEdadMenor: 38 * 12 + 3, edadMenor: [65, 0], edadGeneral: [66, 10] },
                 // Art. 210 + DT 9ª LGSS: 50% a los 15 años y tramos mensuales hasta el 100%
                 // (36 años y 6 meses = 438 meses). 49*0,21 + 209*0,19 = 50.
                 escalaBase: { porcentajeInicial: 50, tramos: [{ meses: 49, pct: 0.21 }, { meses: 209, pct: 0.19 }] },
@@ -97,13 +97,16 @@
         },
 
         coeficientes: {
-            involuntaria: { tabla: INVOLUNTARIA, fuente: 'Art. 207.2 LGSS (RDL 2/2023)',   verificado: 'pendiente' },
-            voluntaria:   { tabla: VOLUNTARIA,   fuente: 'Art. 206 bis.2 LGSS (RDL 2/2023)', verificado: 'pendiente' },
+            involuntaria: { tabla: INVOLUNTARIA, fuente: 'Art. 207.2 LGSS (Ley 21/2021)', verificado: 'contrastado' },
+            voluntaria:   { tabla: VOLUNTARIA,   fuente: 'Art. 208.2 LGSS (Ley 21/2021)', verificado: 'contrastado' },
             // Valores de control que el verificador exige. Al contrastar con el BOE,
             // añadir aquí más filas: [tipo, mesesAnticipacion, [t1, t2, t3, t4]]
             anclas: [
                 ['voluntaria', 24, [21.00, 19.00, 17.00, 13.00]],
-                ['involuntaria', 48, [30.00, 28.00, 26.00, 24.00]]
+                ['voluntaria', 21, [12.57, 12.00, 11.43, 10.00]],
+                ['voluntaria', 1, [3.26, 3.11, 2.96, 2.81]],
+                ['involuntaria', 48, [30.00, 28.00, 26.00, 24.00]],
+                ['involuntaria', 21, [12.57, 12.00, 11.38, 10.00]]
             ]
         }
     };

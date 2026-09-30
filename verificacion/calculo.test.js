@@ -10,10 +10,10 @@ test('integridad de legislacion.js sin errores', () => {
     assert.deepEqual(errores, []);
 });
 
-test('edad ordinaria 2026: 65 años con 38a3m; 66a8m si no', () => {
+test('edad ordinaria 2026: 65 años con 38a3m; 66a10m si no', () => {
     assert.equal(C.edadOrdinaria(38.25, 2026).texto, '65 años');
-    assert.equal(C.edadOrdinaria(38.17, 2026).texto, '66 años y 8 meses'); // 38a2m
-    assert.equal(C.edadOrdinaria(30, 2026).texto, '66 años y 8 meses');
+    assert.equal(C.edadOrdinaria(38.17, 2026).texto, '66 años y 10 meses'); // 38a2m
+    assert.equal(C.edadOrdinaria(30, 2026).texto, '66 años y 10 meses');
 });
 
 test('edad ordinaria 2027: 67 años (65 con 38a6m)', () => {
@@ -49,6 +49,11 @@ test('coeficientes de control', () => {
     assert.equal(C.coeficiente('involuntaria', 48, 36), 30);
     assert.equal(C.coeficiente('involuntaria', 12, 36), 5.5);
     assert.equal(C.coeficiente('involuntaria', 0, 36), 0);
+    // Valores de los arts. 207.2 y 208.2 LGSS (BOE)
+    assert.equal(C.coeficiente('voluntaria', 1, 36), 3.26);
+    assert.equal(C.coeficiente('voluntaria', 23, 36), 17.6);
+    assert.equal(C.coeficiente('voluntaria', 21, 42), 11.43);
+    assert.equal(C.coeficiente('involuntaria', 21, 36), 12.57);
 });
 
 test('requisitos de acceso a anticipada', () => {

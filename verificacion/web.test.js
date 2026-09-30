@@ -22,5 +22,5 @@ test('script.js ejecuta el cálculo con los módulos legales', () => {
     for (const f of ['legislacion.js', 'calculo.js', 'script.js'])
         vm.runInContext(fs.readFileSync(path.join(__dirname, '..', f), 'utf8'), ctx, { filename: f });
     assert.match(nodos.resultArea.innerHTML, /Pensión ordinaria/);
-    assert.match(nodos.resultArea.innerHTML, /66 años y 8 meses|65 años/);
+    assert.match(nodos.resultArea.innerHTML, /66 años y 10 meses|65 años/);
 });

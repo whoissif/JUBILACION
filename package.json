@@ -3,7 +3,8 @@
   "private": true,
   "description": "Simulador de jubilación anticipada (España) con verificación de parámetros legales",
   "scripts": {
-    "test": "node --test verificacion/calculo.test.js verificacion/web.test.js",
-    "verificar": "node verificacion/integridad.js"
+    "test": "node --test verificacion/calculo.test.js verificacion/web.test.js verificacion/boe.test.js",
+    "verificar": "node verificacion/integridad.js",
+    "boe": "node verificacion/boe.js"
   }
 }

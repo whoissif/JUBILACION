@@ -1,0 +1,36 @@
+{
+  "verificado": "2026-09-30",
+  "fuente": "BOE-A-2015-11724 (LGSS, texto consolidado)",
+  "bloques": {
+    "a205": {
+      "titulo": "Art. 205",
+      "vigencia": "20160102",
+      "sha256": "78e3934e00c1963fe29d9d9a9bc7e5527db3e5d4ce705544facce33de14c4d6a"
+    },
+    "a207": {
+      "titulo": "Art. 207",
+      "vigencia": "20221007",
+      "sha256": "fedb1fc689df7af62e4d907f0fcc5e6d4e87deee2f14374b9788db22a0cafd6b"
+    },
+    "a208": {
+      "titulo": "Art. 208",
+      "vigencia": "20220101",
+      "sha256": "24c17bac2b30ae77d88112342e5b47395acdf97905047a744df047b8450ee44d"
+    },
+    "a210": {
+      "titulo": "Art. 210",
+      "vigencia": "20250401",
+      "sha256": "c2690c8eeea26409d4b09a0990b5a98209444503a1615db4028a00f1f439bc03"
+    },
+    "dtseptima": {
+      "titulo": "DT 7ª",
+      "vigencia": "20160102",
+      "sha256": "bfd0c08545dc66f648e2af9b158d69fae341971087044801bfeee8276aeb7e5e"
+    },
+    "dtnovena": {
+      "titulo": "DT 9ª",
+      "vigencia": "20160102",
+      "sha256": "2620b6855b5fed1249f34c81b2d9281b08496f8b5c9aec9de68d09ad82fd7635"
+    }
+  }
+}

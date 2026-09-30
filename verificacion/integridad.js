@@ -47,7 +47,8 @@ function verificar(hoy = new Date()) {
             if (m < 1 || m > max) errores.push(`Tabla ${tipo}: fila fuera de rango (${m})`);
 
         // Irregularidades: el incremento mes a mes debería ser estable; se señalan saltos atípicos.
-        for (let t = 0; t < 4; t++) {
+        // (solo si la tabla no está contrastada: verificacion/boe.js ya la compara con el BOE)
+        for (let t = 0; verificado !== 'contrastado' && t < 4; t++) {
             const inc = [];
             for (let m = 2; m <= max; m++) inc.push(tabla[m][t] - tabla[m - 1][t]);
             const med = inc.slice().sort((a, b) => a - b)[Math.floor(inc.length / 2)];
